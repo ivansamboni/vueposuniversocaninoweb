@@ -1,0 +1,301 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body, .navbar-wrap { font-family: 'Nunito', sans-serif; }
+
+.navbar-wrap {
+  background: #1a1a2e;
+  border-radius: 16px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  position: relative;
+  overflow: hidden;
+}
+
+.navbar-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #16213e 0%, #0f3460 50%, #1a1a2e 100%);
+  z-index: 0;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo svg { width: 28px; height: 28px; }
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.nav-links li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 8px 16px 6px;
+  border-radius: 12px;
+  position: relative;
+  transition: color 0.25s, background 0.25s;
+  overflow: hidden;
+}
+
+.nav-links li a:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+
+.paw-icon {
+  width: 26px;
+  height: 26px;
+  position: relative;
+}
+
+.paw-icon .pad, .paw-icon .toe {
+  fill: rgba(255,255,255,0.6);
+  transition: fill 0.25s;
+}
+
+.nav-links li a:hover .pad,
+.nav-links li a:hover .toe {
+  fill: #e94560;
+}
+
+/* Animación: huellas que caminan al hacer hover */
+@keyframes walkPaw {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  25%  { transform: translateY(-4px) rotate(-8deg); }
+  50%  { transform: translateY(0px) rotate(0deg); }
+  75%  { transform: translateY(-3px) rotate(6deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes bouncePad {
+  0%, 100% { transform: scale(1); }
+  40%       { transform: scale(1.15); }
+}
+
+@keyframes trailFade {
+  0%   { opacity: 0; transform: translateX(-6px) rotate(-20deg) scale(0.7); }
+  30%  { opacity: 1; transform: translateX(0px) rotate(0deg) scale(1); }
+  100% { opacity: 0; transform: translateX(6px) rotate(15deg) scale(0.8); }
+}
+
+.nav-links li a:hover .paw-icon {
+  animation: walkPaw 0.55s ease-in-out infinite;
+}
+
+.nav-links li a:hover .pad {
+  animation: bouncePad 0.55s ease-in-out infinite;
+}
+
+/* Trail de huellas pequeñas que aparecen al hover */
+.paw-trail {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  height: 18px;
+  display: flex;
+  justify-content: space-around;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.nav-links li a:hover .paw-trail {
+  opacity: 1;
+}
+
+.trail-paw {
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+}
+
+.trail-paw:nth-child(1) { animation: none; }
+.trail-paw:nth-child(2) { animation: none; }
+.trail-paw:nth-child(3) { animation: none; }
+
+.nav-links li a:hover .trail-paw:nth-child(1) {
+  animation: trailFade 0.7s ease-out 0s both;
+}
+.nav-links li a:hover .trail-paw:nth-child(2) {
+  animation: trailFade 0.7s ease-out 0.12s both;
+}
+.nav-links li a:hover .trail-paw:nth-child(3) {
+  animation: trailFade 0.7s ease-out 0.24s both;
+}
+
+/* Indicador activo */
+.nav-links li a.active {
+  color: #fff;
+  background: rgba(233, 69, 96, 0.2);
+}
+.nav-links li a.active .pad,
+.nav-links li a.active .toe {
+  fill: #e94560;
+}
+
+/* Underline animado */
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 70%;
+  height: 2px;
+  background: #e94560;
+  border-radius: 2px;
+  transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
+}
+
+.nav-links li a:hover::after,
+.nav-links li a.active::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* CTA button */
+.nav-cta {
+  position: relative;
+  z-index: 1;
+  background: #e94560;
+  color: #fff;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.3px;
+}
+
+.nav-cta:hover {
+  background: #c73652;
+  transform: scale(1.04);
+}
+</style>
+
+<div class="navbar-wrap">
+  <div class="logo">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="20" fill="#e94560" opacity="0.15"/>
+      <ellipse cx="20" cy="24" rx="10" ry="8" fill="#e94560"/>
+      <circle cx="14" cy="14" r="4" fill="#e94560"/>
+      <circle cx="26" cy="14" r="4" fill="#e94560"/>
+      <circle cx="9"  cy="20" r="3" fill="#e94560"/>
+      <circle cx="31" cy="20" r="3" fill="#e94560"/>
+    </svg>
+    PawCo
+  </div>
+
+  <ul class="nav-links">
+
+    <li>
+      <a href="#servicios">
+        <div class="paw-trail">
+          <svg class="trail-paw" viewBox="0 0 20 20"><ellipse cx="10" cy="13" rx="6" ry="5" fill="rgba(233,69,96,0.7)"/><circle cx="6" cy="7" r="2.5" fill="rgba(233,69,96,0.7)"/><circle cx="14" cy="7" r="2.5" fill="rgba(233,69,96,0.7)"/><circle cx="3" cy="11" r="2" fill="rgba(233,69,96,0.7)"/><circle cx="17" cy="11" r="2" fill="rgba(233,69,96,0.7)"/></svg>
+          <svg class="trail-paw" viewBox="0 0 20 20"><ellipse cx="10" cy="13" rx="6" ry="5" fill="rgba(233,69,96,0.5)"/><circle cx="6" cy="7" r="2.5" fill="rgba(233,69,96,0.5)"/><circle cx="14" cy="7" r="2.5" fill="rgba(233,69,96,0.5)"/><circle cx="3" cy="11" r="2" fill="rgba(233,69,96,0.5)"/><circle cx="17" cy="11" r="2" fill="rgba(233,69,96,0.5)"/></svg>
+          <svg class="trail-paw" viewBox="0 0 20 20"><ellipse cx="10" cy="13" rx="6" ry="5" fill="rgba(233,69,96,0.3)"/><circle cx="6" cy="7" r="2.5" fill="rgba(233,69,96,0.3)"/><circle cx="14" cy="7" r="2.5" fill="rgba(233,69,96,0.3)"/><circle cx="3" cy="11" r="2" fill="rgba(233,69,96,0.3)"/><circle cx="17" cy="11" r="2" fill="rgba(233,69,96,0.3)"/></svg>
+        </div>
+        <svg class="paw-icon" viewBox="0 0 40 40">
+          <ellipse class="pad" cx="20" cy="27" rx="11" ry="9"/>
+          <circle  class="toe" cx="10" cy="15" r="5"/>
+          <circle  class="toe" cx="20" cy="11" r="5"/>
+          <circle  class="toe" cx="30" cy="15" r="5"/>
+          <circle  class="toe" cx="6"  cy="23" r="4"/>
+          <circle  class="toe" cx="34" cy="23" r="4"/>
+        </svg>
+        Servicios
+      </a>
+    </li>
+
+    <li>
+      <a href="#precios">
+        <div class="paw-trail">
+          <svg class="trail-paw" viewBox="0 0 20 20"><ellipse cx="10" cy="13" rx="6" ry="5" fill="rgba(233,69,96,0.7)"/><circle cx="6" cy="7" r="2.5" fill="rgba(233,69,96,0.7)"/><circle cx="14" cy="7" r="2.5" fill="rgba(233,69,96,0.7)"/><circle cx="3" cy="11" r="2" fill="rgba(233,69,96,0.7)"/><circle cx="17" cy="11" r="2" fill="rgba(233,69,96,0.7)"/></svg>
+          <svg class="trail-paw" viewBox="0 0 20 20"><ellipse cx="10" cy="13" rx="6" ry="5" fill="rgba(233,69,96,0.5)"/><circle cx="6" cy="7" r="2.5" fill="rgba(233,69,96,0.5)"/><circle cx="14" cy="7" r="2.5" fill="rgba(233,69,96,0.5)"/><circle cx="3" cy="11" r="2" fill="rgba(233,69,96,0.5)"/><circle cx="17" cy="11" r="2" fill="rgba(233,69,96,0.5)"/></svg>
+          <svg class="trail-paw" viewBox="0 0 20 20"><ellipse cx="10" cy="13" rx="6" ry="5" fill="rgba(233,69,96,0.3)"/><circle cx="6" cy="7" r="2.5" fill="rgba(233,69,96,0.3)"/><circle cx="14" cy="7" r="2.5" fill="rgba(233,69,96,0.3)"/><circle cx="3" cy="11" r="2" fill="rgba(233,69,96,0.3)"/><circle cx="17" cy="11" r="2" fill="rgba(233,69,96,0.3)"/></svg>
+        </div>
+        <svg class="paw-icon" viewBox="0 0 40 40">
+          <ellipse class="pad" cx="20" cy="27" rx="11" ry="9"/>
+          <circle  class="toe" cx="10" cy="15" r="5"/>
+          <circle  class="toe" cx="20" cy="11" r="5"/>
+          <circle  class="toe" cx="30" cy="15" r="5"/>
+          <circle  class="toe" cx="6"  cy="23" r="4"/>
+          <circle  class="toe" cx="34" cy="23" r="4"/>
+        </svg>
+        Precios
+      </a>
+    </li>
+
+    <li>
+      <a href="#testimonios">
+        <div class="paw-trail">
+          <svg class="trail-paw" viewBox="0 0 20 20"><ellipse cx="10" cy="13" rx="6" ry="5" fill="rgba(233,69,96,0.7)"/><circle cx="6" cy="7" r="2.5" fill="rgba(233,69,96,0.7)"/><circle cx="14" cy="7" r="2.5" fill="rgba(233,69,96,0.7)"/><circle cx="3" cy="11" r="2" fill="rgba(233,69,96,0.7)"/><circle cx="17" cy="11" r="2" fill="rgba(233,69,96,0.7)"/></svg>
+          <svg class="trail-paw" viewBox="0 0 20 20"><ellipse cx="10" cy="13" rx="6" ry="5" fill="rgba(233,69,96,0.5)"/><circle cx="6" cy="7" r="2.5" fill="rgba(233,69,96,0.5)"/><circle cx="14" cy="7" r="2.5" fill="rgba(233,69,96,0.5)"/><circle cx="3" cy="11" r="2" fill="rgba(233,69,96,0.5)"/><circle cx="17" cy="11" r="2" fill="rgba(233,69,96,0.5)"/></svg>
+          <svg class="trail-paw" viewBox="0 0 20 20"><ellipse cx="10" cy="13" rx="6" ry="5" fill="rgba(233,69,96,0.3)"/><circle cx="6" cy="7" r="2.5" fill="rgba(233,69,96,0.3)"/><circle cx="14" cy="7" r="2.5" fill="rgba(233,69,96,0.3)"/><circle cx="3" cy="11" r="2" fill="rgba(233,69,96,0.3)"/><circle cx="17" cy="11" r="2" fill="rgba(233,69,96,0.3)"/></svg>
+        </div>
+        <svg class="paw-icon" viewBox="0 0 40 40">
+          <ellipse class="pad" cx="20" cy="27" rx="11" ry="9"/>
+          <circle  class="toe" cx="10" cy="15" r="5"/>
+          <circle  class="toe" cx="20" cy="11" r="5"/>
+          <circle  class="toe" cx="30" cy="15" r="5"/>
+          <circle  class="toe" cx="6"  cy="23" r="4"/>
+          <circle  class="toe" cx="34" cy="23" r="4"/>
+        </svg>
+        Testimonios
+      </a>
+    </li>
+
+    <li>
+      <a href="#blog">
+        <div class="paw-trail">
+          <svg class="trail-paw" viewBox="0 0 20 20"><ellipse cx="10" cy="13" rx="6" ry="5" fill="rgba(233,69,96,0.7)"/><circle cx="6" cy="7" r="2.5" fill="rgba(233,69,96,0.7)"/><circle cx="14" cy="7" r="2.5" fill="rgba(233,69,96,0.7)"/><circle cx="3" cy="11" r="2" fill="rgba(233,69,96,0.7)"/><circle cx="17" cy="11" r="2" fill="rgba(233,69,96,0.7)"/></svg>
+          <svg class="trail-paw" viewBox="0 0 20 20"><ellipse cx="10" cy="13" rx="6" ry="5" fill="rgba(233,69,96,0.5)"/><circle cx="6" cy="7" r="2.5" fill="rgba(233,69,96,0.5)"/><circle cx="14" cy="7" r="2.5" fill="rgba(233,69,96,0.5)"/><circle cx="3" cy="11" r="2" fill="rgba(233,69,96,0.5)"/><circle cx="17" cy="11" r="2" fill="rgba(233,69,96,0.5)"/></svg>
+          <svg class="trail-paw" viewBox="0 0 20 20"><ellipse cx="10" cy="13" rx="6" ry="5" fill="rgba(233,69,96,0.3)"/><circle cx="6" cy="7" r="2.5" fill="rgba(233,69,96,0.3)"/><circle cx="14" cy="7" r="2.5" fill="rgba(233,69,96,0.3)"/><circle cx="3" cy="11" r="2" fill="rgba(233,69,96,0.3)"/><circle cx="17" cy="11" r="2" fill="rgba(233,69,96,0.3)"/></svg>
+        </div>
+        <svg class="paw-icon" viewBox="0 0 40 40">
+          <ellipse class="pad" cx="20" cy="27" rx="11" ry="9"/>
+          <circle  class="toe" cx="10" cy="15" r="5"/>
+          <circle  class="toe" cx="20" cy="11" r="5"/>
+          <circle  class="toe" cx="30" cy="15" r="5"/>
+          <circle  class="toe" cx="6"  cy="23" r="4"/>
+          <circle  class="toe" cx="34" cy="23" r="4"/>
+        </svg>
+        Blog
+      </a>
+    </li>
+
+  </ul>
+
+  <button class="nav-cta">🐾 Adoptar</button>
+</div>
