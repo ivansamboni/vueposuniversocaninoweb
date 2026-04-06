@@ -47,7 +47,7 @@
   });
 
   let cur = 0;
-  const total = 4;
+  const total = 3;
   const track = document.getElementById("track");
   const dots = document.querySelectorAll(".dot");
   function update() {
